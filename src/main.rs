@@ -32,6 +32,9 @@ fn main() {
     println!("\n--------------------------");
 }
 
+/////////////////////////////////////////
+// MEDIA DECLARATION
+/////////////////////////////////////////
 #[derive(Debug)]
 enum Media {    
     Book { title: String, author: String },
@@ -39,6 +42,9 @@ enum Media {
     Audiobook {title: String }
 }
 
+/////////////////////////////////////////
+// MEDIA IMPLEMENTATION
+/////////////////////////////////////////
 impl Media {
     fn description(&self) -> String {
         match self {
