@@ -23,17 +23,49 @@ fn main() {
     };
 
     /////////////////////////////////////////
+    // CATALOG
+    /////////////////////////////////////////
+    let mut catalog = Catalog::new();
+
+    catalog.add(audiobook);
+    catalog.add(good_movie);
+    catalog.add(bad_book);
+
+    println!("{:#?}", catalog)
+
+    /////////////////////////////////////////
     // DESCRIPTON
     /////////////////////////////////////////
-    println!("\n--------------------------");
-    println!("{}", audiobook.description());
-    println!("{}", good_movie.description());
-    println!("{}", bad_book.description());
-    println!("\n--------------------------");
+    // println!("\n--------------------------");
+    // println!("{}", audiobook.description());
+    // println!("{}", good_movie.description());
+    // println!("{}", bad_book.description());
+    // println!("\n--------------------------");
 }
 
 /////////////////////////////////////////
-// MEDIA DECLARATION
+// CATALOG DECLARATION BLOCK
+/////////////////////////////////////////
+#[derive(Debug)]
+struct Catalog {
+    items: Vec<Media>
+}
+
+/////////////////////////////////////////
+// CATALOG IMPLEMENTATION BLOCK
+/////////////////////////////////////////
+impl Catalog {
+    fn new() -> Self {
+        Catalog { items: vec![] }
+    }
+
+    fn add(&mut self, media: Media) {
+        self.items.push(media);
+    }
+}
+
+/////////////////////////////////////////
+// MEDIA DECLARATION BLOCK
 /////////////////////////////////////////
 #[derive(Debug)]
 enum Media {    
@@ -43,7 +75,7 @@ enum Media {
 }
 
 /////////////////////////////////////////
-// MEDIA IMPLEMENTATION
+// MEDIA IMPLEMENTATION BLOCK
 /////////////////////////////////////////
 impl Media {
     fn description(&self) -> String {
