@@ -43,7 +43,29 @@ fn main() {
     catalog.add(podcast);
     catalog.add(placeholder);
 
-    println!("{:#?}", catalog)
+    //println!("{:#?}", catalog);
+    // println!("\n{:#?}", catalog.items.get(0));
+    // println!("\n{:#?}", catalog.items.get(100));
+
+    println!("\n\n");
+    match catalog.items.get(0) {
+        Option::Some(value) => {
+            println!("Item: {:#?}", value)
+        },
+        Option::None => {
+            println!("Nothing found at that index")
+        }
+    }
+    println!("\n\n");
+    match catalog.items.get(100) {
+        Option::Some(value) => {
+            println!("Item: {:#?}", value)
+        },
+        Option::None => {
+            println!("Nothing found at that index")
+        }
+    }
+    println!("\n\n");
 
     /////////////////////////////////////////
     // DESCRIPTON
