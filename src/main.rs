@@ -1,3 +1,5 @@
+use std::collections::btree_map::Values;
+
 fn main() {
     /////////////////////////////////////////
     // AUDIOBOOK
@@ -43,29 +45,20 @@ fn main() {
     catalog.add(podcast);
     catalog.add(placeholder);
 
-    //println!("{:#?}", catalog);
-    // println!("\n{:#?}", catalog.items.get(0));
-    // println!("\n{:#?}", catalog.items.get(100));
+    // match catalog.get_by_index(5) {
+    //     MightHaveAValue::ThereIsAValue(value) => {
+    //         println!("(match) Item: {:#?}", value);
+    //     }
+    //     MightHaveAValue::NoValueAvailable => {
+    //         println!("(match) No value at index 0");
+    //     }
+    // }
 
-    println!("\n\n");
-    match catalog.items.get(0) {
-        Option::Some(value) => {
-            println!("Item: {:#?}", value)
-        },
-        Option::None => {
-            println!("Nothing found at that index")
-        }
+    if let MightHaveAValue::ThereIsAValue(value) = catalog.get_by_index(10) {
+        println!("Item (pattern match): {:#?}", value);
+    } else {
+        println!("(pattern match) No value at index 0");
     }
-    println!("\n\n");
-    match catalog.items.get(100) {
-        Option::Some(value) => {
-            println!("Item: {:#?}", value)
-        },
-        Option::None => {
-            println!("Nothing found at that index")
-        }
-    }
-    println!("\n\n");
 
     /////////////////////////////////////////
     // DESCRIPTON
@@ -96,10 +89,20 @@ impl Catalog {
     fn add(&mut self, media: Media) {
         self.items.push(media);
     }
+
+    fn get_by_index(&self, index: usize) -> MightHaveAValue {
+        if self.items.len() > index {
+            MightHaveAValue::ThereIsAValue(&self.items[index])
+        } else {
+            MightHaveAValue::NoValueAvailable
+        }  
+    }
 }
 
-/////////////////////////////////////////
-// MEDIA DECLARATION BLOCK
+enum MightHaveAValue<'a> {
+    ThereIsAValue(&'a Media),
+    NoValueAvailable
+}
 /////////////////////////////////////////
 #[derive(Debug)]
 enum Media {    
