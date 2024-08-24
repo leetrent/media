@@ -48,26 +48,19 @@ fn main() {
     ///////////////////////////////////////////////////
     // UNWRAP
     ///////////////////////////////////////////////////
-    let item = catalog.get_by_index(1);
-    println!();
-    println!("{:#?}", item.unwrap());
-    println!();
+    unwrap_item(&catalog, 1);
 
     ///////////////////////////////////////////////////
     // UNWRAP (will panic)
     ///////////////////////////////////////////////////
-    let item = catalog.get_by_index(99);
+    //unwrap_item(&catalog, 99);
+}
+
+fn unwrap_item(catalog: &Catalog, index: usize) {
+    let item = catalog.get_by_index(index);
     println!();
     println!("{:#?}", item.unwrap());
     println!();
-
-
-
-
-}
-
-fn unwap() {
-    
 }
 
 /////////////////////////////////////////
