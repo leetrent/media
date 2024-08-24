@@ -48,7 +48,7 @@ fn main() {
     ///////////////////////////////////////////////////
     // UNWRAP (found)
     ///////////////////////////////////////////////////
-    unwrap_item(&catalog, 1);
+    //unwrap_item(&catalog, 1);
 
     ///////////////////////////////////////////////////
     // UNWRAP (will panic)
@@ -58,12 +58,22 @@ fn main() {
     ///////////////////////////////////////////////////
     // EXPECT (found)
     ///////////////////////////////////////////////////
-    expect_item(&catalog, 1);
+    //expect_item(&catalog, 2);
 
     ///////////////////////////////////////////////////
     // EXPECT (will panic)
     ///////////////////////////////////////////////////
     //expect_item(&catalog, 99);
+
+    ///////////////////////////////////////////////////
+    // UNWRAP_OR(found)
+    ///////////////////////////////////////////////////
+    unwrap_or_item(&catalog, 3);
+
+    ///////////////////////////////////////////////////
+    // UNWRAP (will not panic)
+    ///////////////////////////////////////////////////
+    unwrap_or_item(&catalog, 99);
 }
 
 fn unwrap_item(catalog: &Catalog, index: usize) {
@@ -78,6 +88,14 @@ fn expect_item(catalog: &Catalog, index: usize) {
     println!();
     let msg = format!("Expected there to be an item at: {0}", index);
     println!("{:#?}", item.expect(&msg));
+    println!();
+}
+
+fn unwrap_or_item(catalog: &Catalog, index: usize) {
+    let placeholder = Media::Placeholder;
+    let item = catalog.get_by_index(index);
+    println!();
+    println!("{:#?}", item.unwrap_or(&placeholder));
     println!();
 }
 
