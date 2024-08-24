@@ -46,7 +46,7 @@ fn main() {
     catalog.add(placeholder);
 
     ///////////////////////////////////////////////////
-    // UNWRAP
+    // UNWRAP (found)
     ///////////////////////////////////////////////////
     unwrap_item(&catalog, 1);
 
@@ -54,12 +54,30 @@ fn main() {
     // UNWRAP (will panic)
     ///////////////////////////////////////////////////
     //unwrap_item(&catalog, 99);
+
+    ///////////////////////////////////////////////////
+    // EXPECT (found)
+    ///////////////////////////////////////////////////
+    expect_item(&catalog, 1);
+
+    ///////////////////////////////////////////////////
+    // EXPECT (will panic)
+    ///////////////////////////////////////////////////
+    //expect_item(&catalog, 99);
 }
 
 fn unwrap_item(catalog: &Catalog, index: usize) {
     let item = catalog.get_by_index(index);
     println!();
     println!("{:#?}", item.unwrap());
+    println!();
+}
+
+fn expect_item(catalog: &Catalog, index: usize) {
+    let item = catalog.get_by_index(index);
+    println!();
+    let msg = format!("Expected there to be an item at: {0}", index);
+    println!("{:#?}", item.expect(&msg));
     println!();
 }
 
