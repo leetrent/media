@@ -45,20 +45,22 @@ fn main() {
     catalog.add(podcast);
     catalog.add(placeholder);
 
-    // match catalog.get_by_index(5) {
-    //     MightHaveAValue::ThereIsAValue(value) => {
-    //         println!("(match) Item: {:#?}", value);
-    //     }
-    //     MightHaveAValue::NoValueAvailable => {
-    //         println!("(match) No value at index 0");
-    //     }
-    // }
-
-    if let MightHaveAValue::ThereIsAValue(value) = catalog.get_by_index(10) {
+    println!("");
+    match catalog.get_by_index(4) {
+        Some(value) => {
+            println!("(match) Item: {:#?}", value);
+        }
+        None => {
+            println!("(match) No value at index 0");
+        }
+    }
+    println!("");
+    if let Some(value) = catalog.get_by_index(99) {
         println!("Item (pattern match): {:#?}", value);
     } else {
-        println!("(pattern match) No value at index 0");
+        println!("(pattern match) No value at index 99");
     }
+    println!("");
 
     /////////////////////////////////////////
     // DESCRIPTON
@@ -90,19 +92,15 @@ impl Catalog {
         self.items.push(media);
     }
 
-    fn get_by_index(&self, index: usize) -> MightHaveAValue {
+    fn get_by_index(&self, index: usize) -> Option<&Media> {
         if self.items.len() > index {
-            MightHaveAValue::ThereIsAValue(&self.items[index])
+            Some(&self.items[index])
         } else {
-            MightHaveAValue::NoValueAvailable
+            None
         }  
     }
 }
 
-enum MightHaveAValue<'a> {
-    ThereIsAValue(&'a Media),
-    NoValueAvailable
-}
 /////////////////////////////////////////
 #[derive(Debug)]
 enum Media {    
