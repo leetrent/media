@@ -45,31 +45,29 @@ fn main() {
     catalog.add(podcast);
     catalog.add(placeholder);
 
-    println!("");
-    match catalog.get_by_index(4) {
-        Some(value) => {
-            println!("(match) Item: {:#?}", value);
-        }
-        None => {
-            println!("(match) No value at index 0");
-        }
-    }
-    println!("");
-    if let Some(value) = catalog.get_by_index(99) {
-        println!("Item (pattern match): {:#?}", value);
-    } else {
-        println!("(pattern match) No value at index 99");
-    }
-    println!("");
+    ///////////////////////////////////////////////////
+    // UNWRAP
+    ///////////////////////////////////////////////////
+    let item = catalog.get_by_index(1);
+    println!();
+    println!("{:#?}", item.unwrap());
+    println!();
 
-    /////////////////////////////////////////
-    // DESCRIPTON
-    /////////////////////////////////////////
-    // println!("\n--------------------------");
-    // println!("{}", audiobook.description());
-    // println!("{}", good_movie.description());
-    // println!("{}", bad_book.description());
-    // println!("\n--------------------------");
+    ///////////////////////////////////////////////////
+    // UNWRAP (will panic)
+    ///////////////////////////////////////////////////
+    let item = catalog.get_by_index(99);
+    println!();
+    println!("{:#?}", item.unwrap());
+    println!();
+
+
+
+
+}
+
+fn unwap() {
+    
 }
 
 /////////////////////////////////////////
