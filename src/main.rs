@@ -19,15 +19,15 @@ fn main() {
         Account { balance: 10 }
     ];
     
-    let first_account = accounts.first_mut();
-    match first_account {
+    match accounts.first_mut() {
         Some(first_account) => {
             first_account.balance = 30;
+            println!("\n{:#?}", first_account);
         },
         None => {
             println!("No account found");
         }
     }
 
-    println!("{:#?}", accounts);
+    println!("\n{:#?}", accounts);
 }
